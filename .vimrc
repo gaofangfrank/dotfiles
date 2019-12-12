@@ -17,6 +17,8 @@ filetype off                  " required
  Plugin 'vim-scripts/vim-auto-save'
  Plugin 'scrooloose/nerdcommenter'
  Plugin 'vim-python/python-syntax'
+ Plugin 'vim-airline/vim-airline'
+ Plugin 'vim-airline/vim-airline-themes'
  Plugin 'lervag/vimtex'
  Plugin 'vim-scripts/DoxygenToolkit.vim'
  Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -53,14 +55,13 @@ set cursorline
 set nobackup
 set noswapfile
 scriptencoding utf-8
+set encoding=utf-8
 set fileencoding=utf-8
 
-let g:auto_save = 0
+let g:auto_save = 1
 
 color elflord
 
-inoremap <CR> <CR>x<BS>
-inoremap {<CR> {}<left><CR><up><end><CR>x<BS>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -69,10 +70,12 @@ set splitbelow
 set splitright
 
 " ycm config
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_python_binary_path = 'python'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " nerdtree config
 nnoremap tn :NERDTreeToggle<CR>
@@ -81,6 +84,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " syntastic 
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_python_checkers=['flake8']
 
 " cpp highlight
 let g:cpp_class_scope_highlight = 1
+
+" go to last opened position
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
