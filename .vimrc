@@ -23,6 +23,7 @@ filetype off                  " required
  Plugin 'vim-scripts/DoxygenToolkit.vim'
  Plugin 'octol/vim-cpp-enhanced-highlight'
  Plugin 'fatih/vim-go'
+ Plugin 'Konfekt/FastFold'
  call vundle#end()            " required
  filetype plugin indent on    " required
  " To ignore plugin indent changes, instead use:
@@ -45,6 +46,8 @@ set shiftwidth=2
 set expandtab
 set hlsearch
 set nowrap
+set foldmethod=syntax
+set foldnestmax=3
 
 
 syntax enable
