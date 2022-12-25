@@ -14,15 +14,11 @@ filetype off                  " required
  Plugin 'vim-syntastic/syntastic'
  Plugin 'scrooloose/nerdtree'
  Plugin 'vim-scripts/DrawIt'
- Plugin 'vim-scripts/vim-auto-save'
  Plugin 'scrooloose/nerdcommenter'
  Plugin 'vim-python/python-syntax'
  Plugin 'vim-airline/vim-airline'
  Plugin 'vim-airline/vim-airline-themes'
- Plugin 'lervag/vimtex'
- Plugin 'vim-scripts/DoxygenToolkit.vim'
  Plugin 'octol/vim-cpp-enhanced-highlight'
- Plugin 'fatih/vim-go'
  Plugin 'Konfekt/FastFold'
  call vundle#end()            " required
  filetype plugin indent on    " required
@@ -61,8 +57,6 @@ scriptencoding utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 
-let g:auto_save = 1
-
 color elflord
 
 nnoremap <C-J> <C-W><C-J>
@@ -94,3 +88,5 @@ let g:cpp_class_scope_highlight = 1
 
 " go to last opened position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+
+packadd termdebug
