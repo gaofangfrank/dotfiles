@@ -1,0 +1,7 @@
+--exclude=test/*
+--languages=C++
+
+--kinds-c++=+pflz
+--fields=+SsKe
+--fields-c++=+{captures}
+--fields-c++=+{macrodef}
