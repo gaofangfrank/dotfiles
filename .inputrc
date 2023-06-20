@@ -1,0 +1,4 @@
+set bell-style none
+set completion-prefix-display-length 5
+set completion-ignore-case On
+set mark-symlinked-directories On
