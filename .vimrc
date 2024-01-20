@@ -94,7 +94,7 @@ map <C-P> :call FormatFile()<cr>
 " Pretty colors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
-set termguicolors
+"set termguicolors
 "colorscheme PaperColor
 colorscheme rigel
 let g:rigel_airline = 1
@@ -105,7 +105,7 @@ let g:airline_theme = 'rigel'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar config
 let g:tagbar_ctags_options = ['NONE', '~/.config/ctags/options.ctags']
-let g:tagbar_ctags_bin = '~/.local/bin/ctags'
+"let g:tagbar_ctags_bin = '~/.local/bin/ctags'
 nmap <leader>f :TagbarToggle<CR>
 
 " ycm config
@@ -118,6 +118,11 @@ let g:ycm_clangd_binary_path = exepath("/usr/local/bin/clangd")
 let g:ycm_clangd_uses_ycmd_caching = 0
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>i :YcmCompleter FixIt<CR>
+let g:ycm_language_server = [ {
+      \ 'name': 'mlir',
+      \ 'cmdline': ['mlir-lsp-server'],
+      \ 'filetypes': ['mlir'],
+      \ }, ]
 
 " nerdtree config
 nnoremap tn :NERDTreeToggle<CR>
