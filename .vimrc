@@ -31,6 +31,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-fugitive'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'Rigellute/rigel'
 Plugin 'Konfekt/FastFold'
 Plugin 'chrisbra/csv.vim'
 Plugin 'fidian/hexmode'
@@ -38,6 +39,10 @@ Plugin 'azabiong/vim-highlighter'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Variables of all sorts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number
 set tabstop=2
 set shiftwidth=2
@@ -52,20 +57,18 @@ set fileencoding=utf-8
 set tags=tags;
 set foldmethod=syntax
 set foldnestmax=5
-let python_highlight_all = 1
 set noeb vb t_vb=
 set colorcolumn=+1
-hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-
-set background=dark
-colorscheme PaperColor
-syntax enable
+set splitbelow
+set splitright
+set backspace=indent,eol,start
 scriptencoding utf-8
+syntax enable
+let python_highlight_all = 1
 
-" Tagbar config
-let g:tagbar_ctags_options=['NONE', '~/.config/ctags/options.ctags']
-let g:tagbar_ctags_bin='~/.local/bin/ctags'
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom key bindings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap <CR> <CR>x<BS>
 inoremap {<CR> {}<left><CR><up><end><CR>x<BS>
 nnoremap <C-J> <C-W><C-J>
@@ -73,31 +76,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-set splitbelow
-set splitright
-set backspace=indent,eol,start
-
-autocmd BufNewFile,BufRead *.cce set syntax=cpp
-
-" Highlight trailing whitespace and lines longer than 80 columns.
-highlight LongLine ctermbg=DarkYellow guibg=DarkYellow
-highlight WhitespaceEOL ctermbg=DarkYellow guibg=DarkYellow
-if v:version >= 702
-  " Lines longer than 80 columns.
-  "au BufWinEnter * let w:m0=matchadd('LongLine', '\%>80v.\+', -1)
-
-  " Whitespace at the end of a line. This little dance suppresses
-  " whitespace that has just been typed.
-  au BufWinEnter * let w:m1=matchadd('WhitespaceEOL', '\s\+$', -1)
-  au InsertEnter * call matchdelete(w:m1)
-  au InsertEnter * let w:m2=matchadd('WhitespaceEOL', '\s\+\%#\@<!$', -1)
-  au InsertLeave * call matchdelete(w:m2)
-  au InsertLeave * let w:m1=matchadd('WhitespaceEOL', '\s\+$', -1)
-else
-  au BufRead,BufNewFile * syntax match LongLine /\%>80v.\+/
-  au InsertEnter * syntax match WhitespaceEOL /\s\+\%#\@<!$/
-  au InsertLeave * syntax match WhitespaceEOL /\s\+$/
-endif
 
 " clang format
 map <C-I> :py3f ~/.vim/clang-format.py<cr>
@@ -112,42 +90,52 @@ imap <C-I> <c-o>:py3f ~/.vim/clang-format.py<cr>
 :endfunction
 map <C-P> :call FormatFile()<cr>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pretty colors
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set background=dark
+set termguicolors
+"colorscheme PaperColor
+colorscheme rigel
+let g:rigel_airline = 1
+let g:airline_theme = 'rigel'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin configurations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar config
+let g:tagbar_ctags_options = ['NONE', '~/.config/ctags/options.ctags']
+let g:tagbar_ctags_bin = '~/.local/bin/ctags'
+nmap <leader>f :TagbarToggle<CR>
+
 " ycm config
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_clangd_binary_path = exepath("~/FIXME/build-clangd/bin/clangd")
+let g:ycm_clangd_binary_path = exepath("/usr/local/bin/clangd")
 let g:ycm_clangd_uses_ycmd_caching = 0
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>i :YcmCompleter FixIt<CR>
-
-" tagbar
-nmap <leader>f :TagbarToggle<CR>
 
 " nerdtree config
 nnoremap tn :NERDTreeToggle<CR>
 " close vim if last window is nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_check_on_open=1
-"let g:syntastic_check_on_wq=0
-
 " cpp highlight
 let g:cpp_class_scope_highlight = 1
+
+" Hexmode config
+let g:hexmode_xxd_options = '-g 1'
 
 " go to last opened position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+" Enable in-editor debugger
 packadd termdebug
 let g:termdebug_wide = 110
 
 " json formatting
 com! JSON %!python -m json.tool
-
-let g:hexmode_xxd_options = '-g 1'
