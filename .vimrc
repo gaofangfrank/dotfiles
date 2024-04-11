@@ -25,10 +25,10 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'preservim/tagbar'
+Plugin 'yegappan/taglist'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'bfrg/vim-cpp-modern'
 Plugin 'tpope/vim-fugitive'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'Rigellute/rigel'
@@ -36,6 +36,7 @@ Plugin 'Konfekt/FastFold'
 Plugin 'chrisbra/csv.vim'
 Plugin 'fidian/hexmode'
 Plugin 'azabiong/vim-highlighter'
+Plugin 'MTDL9/vim-log-highlighting'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " " Put your non-Plugin stuff after this line
@@ -57,6 +58,7 @@ set fileencoding=utf-8
 set tags=tags;
 set foldmethod=syntax
 set foldnestmax=5
+let python_highlight_all = 1
 set noeb vb t_vb=
 set colorcolumn=+1
 set splitbelow
@@ -64,18 +66,17 @@ set splitright
 set backspace=indent,eol,start
 scriptencoding utf-8
 syntax enable
-let python_highlight_all = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom key bindings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap <CR> <CR>x<BS>
 inoremap {<CR> {}<left><CR><up><end><CR>x<BS>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
 
 " clang format
 map <C-I> :py3f ~/.vim/clang-format.py<cr>
@@ -103,11 +104,6 @@ let g:airline_theme = 'rigel'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin configurations
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar config
-let g:tagbar_ctags_options = ['NONE', '~/.config/ctags/options.ctags']
-"let g:tagbar_ctags_bin = '~/.local/bin/ctags'
-nmap <leader>f :TagbarToggle<CR>
-
 " ycm config
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
@@ -118,19 +114,27 @@ let g:ycm_clangd_binary_path = exepath("/usr/local/bin/clangd")
 let g:ycm_clangd_uses_ycmd_caching = 0
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>i :YcmCompleter FixIt<CR>
-let g:ycm_language_server = [ {
-      \ 'name': 'mlir',
-      \ 'cmdline': ['mlir-lsp-server'],
-      \ 'filetypes': ['mlir'],
-      \ }, ]
+nmap <leader>D <plug>(YCMHover)
+let g:ycm_language_server = [
+      \{ 'name': 'mlir-lsp-server',
+        \'filetypes': [ 'mlir' ],
+        \'cmdline': [ '/usr/local/bin/mlir-lsp-server' ] },
+\]
+
+" taglist
+nmap <leader>f :TlistToggle<CR>
+let Tlist_Use_Right_Window=1
+let Tlist_Exit_OnlyWindow=1
 
 " nerdtree config
 nnoremap tn :NERDTreeToggle<CR>
 " close vim if last window is nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" cpp highlight
-let g:cpp_class_scope_highlight = 1
+" commenter
+let NERDCommentWholeLinesInVMode=1
+let NERDSpaceDelims=1
+let NERDTrimTrailingWhitespace=1
 
 " Hexmode config
 let g:hexmode_xxd_options = '-g 1'
