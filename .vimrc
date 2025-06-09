@@ -105,21 +105,22 @@ let g:airline_theme = 'rigel'
 " Plugin configurations
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ycm config
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"let g:ycm_python_binary_path = '/usr/bin/python3'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_clangd_binary_path = exepath("/usr/local/bin/clangd")
+"let g:ycm_clangd_binary_path = exepath("/usr/local/bin/clangd")
 let g:ycm_clangd_uses_ycmd_caching = 0
+let g:ycm_clangd_args = ["-header-insertion=never"]
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>i :YcmCompleter FixIt<CR>
 nmap <leader>D <plug>(YCMHover)
-let g:ycm_language_server = [
-      \{ 'name': 'mlir-lsp-server',
-        \'filetypes': [ 'mlir' ],
-        \'cmdline': [ '/usr/local/bin/mlir-lsp-server' ] },
-\]
+"let g:ycm_language_server = [
+"      \{ 'name': 'mlir-lsp-server',
+"        \'filetypes': [ 'mlir' ],
+"        \'cmdline': [ '/usr/local/bin/mlir-lsp-server' ] },
+"\]
 
 " taglist
 nmap <leader>f :TlistToggle<CR>
