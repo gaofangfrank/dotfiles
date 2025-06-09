@@ -32,7 +32,16 @@ genprompt() {
   local RED='\[\e[0;31m\]'
   local HAPPY='\[\e[0;94m\]'
   local RESET_COLOR='\[\033[00m\]'
-  PS1="\h \[\033[32m\]\w\[\033[33m\]${GIT}"
+  PS1=""
+  if [[ -n $VIRTUAL_ENV ]]
+  then
+    if [[ -n $VIRTUAL_ENV_PROMPT ]]; then
+      PS1+=$VIRTUAL_ENV_PROMPT
+    else
+      PS1+="(venv) "
+    fi
+  fi
+  PS1+="\h \[\033[32m\]\w\[\033[33m\]${GIT}"
   if [ $EXIT != 0 ]; then
     PS1+=$RED
     PS1+=' ¯\_(ツ)_/¯ '
