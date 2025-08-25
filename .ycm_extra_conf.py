@@ -39,6 +39,7 @@ C_SOURCE_EXTENSIONS = [
 
 CPP_SOURCE_EXTENSIONS = [
         '.cpp',
+        '.cpp.inc',
         '.cxx',
         '.cc',
         '.m',
@@ -52,6 +53,7 @@ SOURCE_DIRECTORIES = [
 
 HEADER_EXTENSIONS = [
         '.h',
+        '.h.inc',
         '.hxx',
         '.hpp',
         '.hh'
@@ -74,6 +76,8 @@ def IsHeaderFile(filename):
 def GetCompilationInfoForFile(database, filename):
     if IsHeaderFile(filename):
         basename = os.path.splitext(filename)[0]
+        # LLVM style tree structure
+        basename = re.sub(r"([a-zA-Z0-9\-]+)\/include\/\1", r"\1/lib", basename)
         for extension in C_SOURCE_EXTENSIONS + CPP_SOURCE_EXTENSIONS:
             # Get info from the source files by replacing the extension.
             replacement_file = basename + extension
