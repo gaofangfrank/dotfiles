@@ -144,8 +144,11 @@ let g:hexmode_xxd_options = '-g 1'
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " Enable in-editor debugger
-packadd termdebug
-let g:termdebug_wide = 110
+packadd! termdebug
+let g:termdebug_config = {}
+let g:termdebug_config['wide'] = 110
+let g:termdebug_config['timeout'] = 9001
+nnoremap <leader>td :Termdebug!<CR>
 
 " json formatting
 com! JSON %!python -m json.tool
