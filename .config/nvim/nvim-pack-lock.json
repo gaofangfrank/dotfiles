@@ -1,0 +1,68 @@
+{
+  "plugins": {
+    "FastFold": {
+      "rev": "c1ddfa1a0e00316d1161ce11438ec980348b8cb9",
+      "src": "https://github.com/Konfekt/FastFold.git"
+    },
+    "codecompanion.nvim": {
+      "rev": "9cc3c1352181253d6a65c709431f30a90a45eb05",
+      "src": "https://github.com/olimorris/codecompanion.nvim.git"
+    },
+    "csv.vim": {
+      "rev": "ab776a6266593e9e0d8643cdb7e577f81c0eab7d",
+      "src": "https://github.com/chrisbra/csv.vim.git"
+    },
+    "hexmode": {
+      "rev": "550cae65fdbd06d61d757dc6fe5a9be5be2e3ef4",
+      "src": "https://github.com/fidian/hexmode.git"
+    },
+    "nerdcommenter": {
+      "rev": "a462bbda1e26f44fb3d3eb9d9d1c6a07aa98e665",
+      "src": "https://github.com/scrooloose/nerdcommenter.git"
+    },
+    "nerdtree": {
+      "rev": "690d061b591525890f1471c6675bcb5bdc8cdff9",
+      "src": "https://github.com/scrooloose/nerdtree.git"
+    },
+    "papercolor-theme": {
+      "rev": "0cfe64ffb24c21a6101b5f994ca342a74c977aef",
+      "src": "https://github.com/NLKNguyen/papercolor-theme.git"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim.git"
+    },
+    "rigel": {
+      "rev": "d5b881432f5f243d3880e659437030930781f9a4",
+      "src": "https://github.com/Rigellute/rigel.git"
+    },
+    "taglist": {
+      "rev": "a48f3b1dcab9996bd65933d2a9ab32b2e12ffd96",
+      "src": "https://github.com/yegappan/taglist.git"
+    },
+    "vim-airline": {
+      "rev": "b03fdc542f5155b54959102a2aecaf6c792dce01",
+      "src": "https://github.com/vim-airline/vim-airline.git"
+    },
+    "vim-airline-themes": {
+      "rev": "77aab8c6cf7179ddb8a05741da7e358a86b2c3ab",
+      "src": "https://github.com/vim-airline/vim-airline-themes.git"
+    },
+    "vim-cpp-modern": {
+      "rev": "b194a25209ed99ae73175cc5cbc94b2d5684f657",
+      "src": "https://github.com/bfrg/vim-cpp-modern.git"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
+      "src": "https://github.com/tpope/vim-fugitive.git"
+    },
+    "vim-highlighter": {
+      "rev": "48a18eea513f651359457845e20b4c6202f6a84a",
+      "src": "https://github.com/azabiong/vim-highlighter.git"
+    },
+    "vim-log-highlighting": {
+      "rev": "1037e26f3120e6a6a2c0c33b14a84336dee2a78f",
+      "src": "https://github.com/MTDL9/vim-log-highlighting.git"
+    }
+  }
+}
